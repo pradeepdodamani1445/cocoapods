@@ -33,12 +33,13 @@ jobs:
           echo "initialized git repo"
           git config user.name "pradeepdodamani1445"
           git config user.email "pradeepdodamani1445@gmail.com"
-          git remote set-url origin https://pradeepdodamani1445:${{secrets.ACTIONS}}@github.com/pradeepdodamani1445/testrepo2.git
+          git config --list 
+          git remote set-url origin https://${{secrets.ACTIONS}}@github.com/pradeepdodamani1445/testrepo2.git
           echo "remote-set url has been set"
           git add .
           ehco "added git files"
           git commit -m "Commiting the Spec repo with depth 1"
           echo "commited files"
 
-          git push -f origin main
+          git push -f origin master
           echo "Pushed files to origin"
