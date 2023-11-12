@@ -34,6 +34,8 @@ jobs:
           git config user.name "pradeepdodamani1445"
           git config user.email "pradeepdodamani1445@gmail.com"
           git config --list 
+          git remote add origin https://github.com/pradeepdodamani1445/testrepo2.git
+          echo "origin added"
           git remote set-url origin https://${{secrets.ACTIONS}}@github.com/pradeepdodamani1445/testrepo2.git
           echo "remote-set url has been set"
           git add .
@@ -41,5 +43,5 @@ jobs:
           git commit -m "Commiting the Spec repo with depth 1"
           echo "commited files"
 
-          git push -f origin master
+          git push origin master
           echo "Pushed files to origin"
