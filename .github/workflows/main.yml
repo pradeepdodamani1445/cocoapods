@@ -23,7 +23,7 @@ jobs:
           rm -rf .git
           rm -rf .github
           echo "removed git and github"
-          curl -X POST -H "Authorization: token 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" -d '{
+          curl -X POST -H "Authorization: token ${{secrets.ACTIONS}}" -d '{
             "name": "testrepo2",
             "auto_init": false,
             "private": false
@@ -33,7 +33,7 @@ jobs:
           echo "initialized git repo"
           git config user.name "pradeepdodamani1445"
           git config user.email "pradeepdodamani1445@gmail.com"
-          git remote set-url origin https://pradeepdodamani1445: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@github.com/pradeepdodamani1445/testrepo2.git
+          git remote set-url origin https://pradeepdodamani1445:${{secrets.ACTIONS}}@github.com/pradeepdodamani1445/testrepo2.git
           echo "remote-set url has been set"
           git add .
           ehco "added git files"
