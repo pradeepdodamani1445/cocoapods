@@ -10,38 +10,20 @@ jobs:
     steps:
       - name: Create empty repository
         run: |
-          echo "Finally echoing from github actions"
-
-          git clone --depth 1 https://github.com/CocoaPods/Specs.git cocoapods
-          echo "cloned repo"
-          cd cocoapods
-          echo "checked into cocoapods"
-          pwd
-          ls -al
-          git remote remove origin
-          echo "removed origin"
-          rm -rf .git
-          rm -rf .github
-          echo "removed git and github"
+          echo "Echoing from github actions"
+          git clone --depth 1 https://github.com/CocoaPods/Specs.git 
+          cd Specs
           curl -X POST -H "Authorization: token ${{secrets.ACTIONS}}" -d '{
-            "name": "testrepo2",
-            "auto_init": false,
-            "private": false
+          "name": "testrepo3",
+          "auto_init": false,
+          "private": false
           }' "https://api.github.com/user/repos"
           echo "created repo"
-          git init
-          echo "initialized git repo"
-          git config user.name "pradeepdodamani1445"
-          git config user.email "pradeepdodamani1445@gmail.com"
-          git config --list 
-          git remote add origin https://github.com/pradeepdodamani1445/testrepo2.git
-          echo "origin added"
-          git remote set-url origin https://${{secrets.ACTIONS}}@github.com/pradeepdodamani1445/testrepo2.git
-          echo "remote-set url has been set"
-          git add .
-          echo "added git files"
-          git commit -m "Commiting the Spec repo with depth 1"
-          echo "commited files"
-
-          git push origin master
+          git remote add own "https://github.com/pradeepdodamani1445/testrepo3.git"
+          echo "added own"
+          git remote set-url own https://${{secrets.ACTIONS}}@github.com/pradeepdodamani1445/testrepo3.git
+          echo "set-url"
+          git commit --amend --no-edit
+          echo "amended"
+          git push own master --force
           echo "Pushed files to origin"
