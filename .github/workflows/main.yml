@@ -19,6 +19,10 @@ jobs:
           "private": false
           }' "https://api.github.com/user/repos"
           echo "created repo"
+          git config user.name "pradeepdodamani1445"
+          git config user.email "pradeepdodamani1445@gmail.com"
+          echo "configured"
+          git config --list
           git remote add own "https://github.com/pradeepdodamani1445/testrepo3.git"
           echo "added own"
           git remote set-url own https://${{secrets.ACTIONS}}@github.com/pradeepdodamani1445/testrepo3.git
