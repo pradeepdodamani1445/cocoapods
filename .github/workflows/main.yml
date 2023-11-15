@@ -10,8 +10,22 @@ jobs:
     steps:
       - name: Create empty repository
         run: |
-          echo "Echoing from github actions"
-          git clone --depth 1 https://github.com/CocoaPods/Specs.git 
+          echo "Echoing from github actions" 
+          response=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: token ${{secrets.ACTIONS}}" \
+            "https://api.github.com/repos/pradeepdodamani1445/testrepo3")  
+          if [ $response -eq 200 ]; then
+            echo "Repository exists."
+            response2=$(curl -X DELETE -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: token ${{secrets.ACTIONS}}" \
+            "https://api.github.com/repos/pradeepdodamani1445/testrepo3")
+            if [ $response2 -eq 204 ]; then
+              echo "Repository deleted successfully."
+            elif [ $response2 -eq 404 ]; then
+              echo "Github actions was not able to delete the repository please delete the repo manually in Github before proceeding to build in app center."
+            fi
+          fi
+          git clone --depth 1 https://github.com/CocoaPods/Specs.git
           cd Specs
           curl -X POST -H "Authorization: token ${{secrets.ACTIONS}}" -d '{
           "name": "testrepo3",
